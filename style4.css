@@ -3,7 +3,7 @@
 /* 1. 전체적인 웹페이지 스타일 */
 body {
     background-color: #cdcdcd;
-    background-image: url('images/back.jpg');
+    background-image: url('./images/back.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
