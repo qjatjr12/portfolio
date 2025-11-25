@@ -339,55 +339,52 @@ Leveraging the characteristics of granular synthesis, the work freely manipulate
     </div>
 
 <script>
-        // 페이지가 로드될 때 실행
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. 브라우저 저장소에 '선택했던 언어'가 있는지 확인
+        // [핵심 수정] 페이지 로드 시 즉시 실행
+        // 저장된 기록이 있으면 스타일을 강제로 바꿔버림
+        (function() {
             const savedLang = sessionStorage.getItem('userLang');
-            
             const splashScreen = document.getElementById('splash-screen');
             const mainContent = document.getElementById('main-content');
 
             if (savedLang) {
-                // [재방문일 경우] 저장된 기록이 있다면 -> 인트로를 즉시 없애고 본문 보여주기
-                splashScreen.style.display = 'none'; 
-                splashScreen.style.opacity = '0';
-                splashScreen.style.visibility = 'hidden';
-
-                mainContent.style.opacity = '1';
-                mainContent.style.visibility = 'visible';
+                // 기록이 있으면: 스플래시를 아예 화면에서 치워버림 (none)
+                if(splashScreen) splashScreen.style.display = 'none';
                 
-                setLanguage(savedLang); // 저장했던 언어로 설정
-            } else {
-                // [첫 방문일 경우] 인트로 유지 (CSS 기본값)
+                // 메인 컨텐츠를 강제로 보이게 함
+                if(mainContent) {
+                    mainContent.style.visibility = 'visible';
+                    mainContent.style.opacity = '1';
+                }
+            }
+        })();
+
+        // DOM 로드 후 언어 설정 적용
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = sessionStorage.getItem('userLang');
+            if (savedLang) {
+                setLanguage(savedLang);
             }
         });
 
-        // [인트로 화면] 언어 버튼 클릭 시 실행
         function enterSite(selectedLang) {
             const splashScreen = document.getElementById('splash-screen');
             const mainContent = document.getElementById('main-content');
             
-            // ★ 핵심: 선택한 언어를 브라우저에 저장해둠
             sessionStorage.setItem('userLang', selectedLang);
-            
-            // 언어 설정 적용
             setLanguage(selectedLang);
             
-            // 인트로 화면 서서히 사라짐
             splashScreen.style.opacity = '0';
             splashScreen.style.visibility = 'hidden';
 
             splashScreen.addEventListener('transitionend', () => {
-                splashScreen.style.display = 'none'; // 완전히 제거
+                splashScreen.style.display = 'none';
                 mainContent.style.visibility = 'visible';
                 mainContent.style.opacity = '1';
             }, { once: true });
         }
 
-        // 언어 변경 및 UI 적용 함수
         function setLanguage(lang) {
-            // 우측 상단 메뉴로 언어를 바꿀 때도 저장소 업데이트
-            sessionStorage.setItem('userLang', lang);
+            sessionStorage.setItem('userLang', lang); // 언어 변경 시에도 저장
 
             const enElements = document.querySelectorAll('.lang-en');
             const jpElements = document.querySelectorAll('.lang-jp');
@@ -395,17 +392,13 @@ Leveraging the characteristics of granular synthesis, the work freely manipulate
             const btnJP = document.getElementById('btn-jp');
 
             if (lang === 'en') {
-                // 영어 표시
                 enElements.forEach(el => el.style.display = 'block');
                 jpElements.forEach(el => el.style.display = 'none');
-                
                 if(btnEn) btnEn.classList.add('active');
                 if(btnJP) btnJP.classList.remove('active');
             } else {
-                // 일본어 표시
                 enElements.forEach(el => el.style.display = 'none');
                 jpElements.forEach(el => el.style.display = 'block');
-                
                 if(btnJP) btnJP.classList.add('active');
                 if(btnEn) btnEn.classList.remove('active');
             }
