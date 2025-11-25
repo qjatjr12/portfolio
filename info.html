@@ -130,7 +130,7 @@
            
         </div>
         
-        <footer class="footer">
+              <footer class="footer">
             <h3 class="contact">CONTACT ME</h3>
             
             <div class="links" style="display: flex; gap: 40px; justify-content: center; align-items: center;">
@@ -150,10 +150,12 @@
     </div>
 
     <script>
+        // 페이지 로드 시 기본 언어 설정 (영어)
         document.addEventListener('DOMContentLoaded', () => {
             setLanguage('en');
         });
 
+        // 언어 변경 함수
         function setLanguage(lang) {
             const enElements = document.querySelectorAll('.lang-en');
             const jpElements = document.querySelectorAll('.lang-jp');
@@ -161,13 +163,19 @@
             const btnJP = document.getElementById('btn-jp');
 
             if (lang === 'en') {
+                // 영어 표시
                 enElements.forEach(el => el.style.display = 'block');
                 jpElements.forEach(el => el.style.display = 'none');
+                
+                // 버튼 스타일
                 if(btnEn) btnEn.classList.add('active');
                 if(btnJP) btnJP.classList.remove('active');
             } else {
+                // 일본어 표시
                 enElements.forEach(el => el.style.display = 'none');
                 jpElements.forEach(el => el.style.display = 'block');
+                
+                // 버튼 스타일
                 if(btnJP) btnJP.classList.add('active');
                 if(btnEn) btnEn.classList.remove('active');
             }
