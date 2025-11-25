@@ -338,67 +338,48 @@ Leveraging the characteristics of granular synthesis, the work freely manipulate
         </div>
     </div>
 
-  <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. 브라우저 저장소에서 '이전에 선택한 언어'가 있는지 확인
-            const savedLang = sessionStorage.getItem('userLang');
-            
-            const splashScreen = document.getElementById('splash-screen');
-            const mainContent = document.getElementById('main-content');
-
-            if (savedLang) {
-                // 저장된 기록이 있다면 -> 인트로(스플래시)를 즉시 숨기고 메인 화면 보여주기
-                splashScreen.style.display = 'none'; 
-                mainContent.style.visibility = 'visible';
-                mainContent.style.opacity = '1';
-                setLanguage(savedLang); // 저장했던 언어로 설정
-            } else {
-                // 기록이 없다면(처음 접속) -> 인트로 화면 유지 (CSS 기본값)
-            }
-        });
-
-        // [인트로] 언어 선택 클릭 시 실행
+<script>
+        // [수정됨] 인트로 화면에서 언어 선택 시 호출되는 함수
         function enterSite(selectedLang) {
             const splashScreen = document.getElementById('splash-screen');
             const mainContent = document.getElementById('main-content');
             
-            // 선택한 언어를 브라우저에 저장 (기억하기)
-            sessionStorage.setItem('userLang', selectedLang);
-            
-            // 언어 설정 적용
+            // 1. 선택된 언어로 사이트 내용 설정
             setLanguage(selectedLang);
             
-            // 인트로 화면 부드럽게 사라짐
+            // 2. 스플래시 화면 서서히 사라짐
             splashScreen.style.opacity = '0';
             splashScreen.style.visibility = 'hidden';
 
+            // 3. 전환 효과 완료 후 메인 화면 표시
             splashScreen.addEventListener('transitionend', () => {
-                splashScreen.style.display = 'none';
-                mainContent.style.visibility = 'visible';
-                mainContent.style.opacity = '1';
+                splashScreen.style.display = 'none'; // DOM에서 제거
+                mainContent.style.visibility = 'visible'; // 보이기
+                mainContent.style.opacity = '1'; // 불투명하게
             }, { once: true });
         }
 
-        // 언어 변경 함수 (메인 로직)
+        // 언어 설정 함수 (메인 로직)
         function setLanguage(lang) {
-            // 언어를 바꿀 때마다 저장소 업데이트
-            sessionStorage.setItem('userLang', lang);
-
             const enElements = document.querySelectorAll('.lang-en');
             const jpElements = document.querySelectorAll('.lang-jp');
             const btnEn = document.getElementById('btn-en');
             const btnJP = document.getElementById('btn-jp');
 
             if (lang === 'en') {
+                // 영어 표시, 일본어 숨김
                 enElements.forEach(el => el.style.display = 'block');
                 jpElements.forEach(el => el.style.display = 'none');
                 
+                // 네비게이션 버튼 상태 변경
                 if(btnEn) btnEn.classList.add('active');
                 if(btnJP) btnJP.classList.remove('active');
             } else {
+                // 일본어 표시, 영어 숨김
                 enElements.forEach(el => el.style.display = 'none');
                 jpElements.forEach(el => el.style.display = 'block');
                 
+                // 네비게이션 버튼 상태 변경
                 if(btnJP) btnJP.classList.add('active');
                 if(btnEn) btnEn.classList.remove('active');
             }
