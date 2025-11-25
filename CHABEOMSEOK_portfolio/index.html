@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHA BEOMSEOK - Portfolio</title>
+    <meta name="description" content="CHA BEOMSEOK의 오디오 비주얼, 인터랙티브 설치 작품 포트폴리오. Max/MSP, TouchDesigner, Ableton Live를 활용한 사운드 및 비주얼 아트">
+    <meta name="keywords" content="CHA BEOMSEOK, portfolio, audio visual, interactive installation, sound art, visual art, Max/MSP, TouchDesigner, Ableton Live, media art">
+    
+    <link rel="stylesheet" type="text/css" href="style4.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&family=Oswald:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 스플래시 화면 스타일 */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        /* 인트로 언어 선택 버튼 컨테이너 */
+        .intro-select-container {
+            text-align: center;
+        }
+
+        /* 인트로 언어 텍스트 스타일 */
+        .intro-btn {
+            color: white;
+            font-family: 'Oswald', sans-serif; /* 영문 폰트 */
+            font-size: 3rem; /* 폰트 크기 큼직하게 */
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            margin: 0 15px; /* 좌우 간격 */
+        }
+
+        /* 일본어 폰트 적용 */
+        .jp-font {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 400;
+            font-size: 2.5rem; /* 일본어는 살짝 작게 */
+        }
+
+        /* 호버 효과 */
+        .intro-btn:hover {
+            color: #888;
+            transform: scale(1.05);
+        }
+
+        /* 구분선 */
+        .intro-divider {
+            color: #444;
+            font-size: 2.5rem;
+            font-weight: 100;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .intro-btn { font-size: 2rem; }
+            .jp-font { font-size: 1.8rem; }
+        }
+
+        /* 메인 콘텐츠 스타일 (초기에는 숨김) */
+        #main-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in, visibility 1s ease-in;
+        }
+
+        .frame {
+            width: 100%;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="splash-screen">
+        <div class="intro-select-container">
+            <span class="intro-btn" onclick="enterSite('en')">English</span>
+            <span class="intro-divider">/</span>
+            <span class="intro-btn jp-font" onclick="enterSite('jp')">日本語</span>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="frame">
+            
+           <nav class="navigator">
+                <h3 class="site-name">CHA BEOMSEOK</h3>
+                <ul>
+                    <li><a class = "nav_menu" href="#recent-works">WORK</a></li>
+                    <li><a class = "nav_menu" href="info.html">About</a></li>
+                </ul>
+                
+                <div class="lang-switch">
+                    <span class="lang-btn active" onclick="setLanguage('en')" id="btn-en">EN</span> / 
+                    <span class="lang-btn" onclick="setLanguage('jp')" id="btn-jp">JP</span>
+                </div>
+            </nav>
+
+            <div class="dashboard">
+               <h1 Class="comment">
+                <span class="lang-en">
+                    I Crafting immersive<br>
+                    <a class="highlight type1">sonic</a> & <a class="highlight type2">visual</a> landscapes.
+                </span>
+                <span class="lang-jp">
+                    没入感のある<br>
+                    <a class="highlight type1">音響</a> と <a class="highlight type2">視覚</a> の風景を構築します。
+                </span>
+            </h1>
+
+            <p class="English_comment">
+                <span class="lang-en">
+                   I delve into the profound convergence of electronic music and visuals, creating diverse interactive installations and compelling audio-visual works. My artistic journey explores philosophical inquiries and various phenomena, meticulously transforming them into immersive digital soundscapes and captivating visual experiences.
+                </span>
+                <span class="lang-jp">
+                  電子音楽とビジュアルの融合を探求し、インタラクティブ・インスタレーションや視聴覚作品を制作しています。哲学的問いや様々な現象を、没入感のあるデジタルサウンドスケープと視覚体験へと変換する芸術実践を行っています。
+                </span>
+            </p>
+            </div>
+<section class="skills-section">
+    <h3 class="section-heading" style="font-size: 40px; font-family: 'Oswald', sans-serif; font-weight: 500; margin-bottom: 30px;">
+        <span class="lang-en">My Expertise & Tools</span>
+        <span class="lang-jp">スキル</span>
+    </h3>
+    
+    <div class="unified-box">
+        
+        <div class="box-left-content">
+            <div class="skills-grid">
+                <div class="skill-item"><p>Max/MSP</p></div>
+                <div class="skill-item"><p>TouchDesigner</p></div>
+                <div class="skill-item"><p>Python</p></div>
+                <div class="skill-item"><p>OpenGL</p></div>
+                <div class="skill-item"><p>Ableton Live</p></div>
+                <div class="skill-item"><p>Adobe Premiere</p></div>
+                <div class="skill-item"><p>Adobe After Effects</p></div>
+            </div>
+        </div>
+
+        <div class="vertical-divider"></div>
+
+        <div class="box-right-content">
+            <h4 class="languages-heading">
+                <span class="lang-en">Languages</span>
+                <span class="lang-jp">言語</span>
+            </h4>
+            <div class="language-list">
+                <div class="language-item"><p>Korean (KR)</p></div>
+                <div class="language-item"><p>Japanese (JP)</p></div>
+                <div class="language-item"><p>English (EN)</p></div>
+            </div>
+        </div>
+
+    </div> 
+</section>
+                
+            <h5 class="recent_menu" id="recent-works">Recent-works</h5>
+
+            <div class="work-container">
+                <div class="recent-work">
+                    <a href="https://youtube.com/shorts/DFuFfkx8pbQ?feature=share" class="work-item">
+                        <img src="images/material.jpg" alt="Drift Project Thumbnail">
+                        <div class="work-overlay">
+                            <h4 class="work-title">Material and sensation</h4>
+                            <p class="work-description">
+                                <span class="lang-en">
+        A/V Installation/2024<br><br><br>
+        Generative visual and sound art, driven by Leap Motion and touch panels that capture participant movements; finger movements influence both sound frequencies and visual changes; multi-channel sound system; interactive frequency modulation and sound granulation through light reflections captured by camera.
+        <br><br> Responsible for exhibition planning, directing, and interactive visual production. Designed the interaction logic and established OSC communication between Max/MSP and TouchDesigner.
+    </span>
+
+    <span class="lang-jp">
+        A/V インスタレーション/2024<br><br><br>
+        Leap Motionとタッチパネルを用いて参加者の動きを捉え、生成的な映像と音響を変化させる作品です。指の動きが音の周波数と映像の変化に影響を与え、カメラで捉えた光の反射を通じてインタラクティブな周波数変調と音の粒状化（グラニュラー）が行われるマルチチャンネル音響システムです。
+        <br><br> 展示の企画・監督、およびインタラクティブ映像制作を担当。Max/MSPとTouchDesigner間のOSC通信構築や、相互作用（インタラクション）のロジック設計を行いました。
+                    </span>
+                            </p>
+                        </div>
+                    </a>
+
+                   <a href="https://youtu.be/5SvSsgvyZCg" class="work-item" target="_blank" rel="noopener noreferrer">
+        <img src="images/impro.jpg" alt="Trial Project Thumbnail">
+        <div class="work-overlay">
+            <h4 class="work-title">Improvisation X Composition</h4>
+            <p class="work-description">
+                <span class="lang-en">
+                    Metamor Teamwork/2024<br><br><br>
+                This work is an A/V performance that visualizes acoustic data from live instrumental performance in real-time. Audio characteristics such as audio levels, frequency spectrum, and attack-decay received from the instruments via Max/MSP are analyzed and establish bidirectional communication with TouchDesigner using OSC protocol. The subtle dynamics of the performance are instantly mapped to visual parameters, generating visual expressions synchronized with the musical articulation.
+The bidirectional communication between Max/MSP and TouchDesigner enables visual changes to be fed back into the audio processing, constructing an organic performance space where the performer and visual system mutually influence each other. At the event venue, this created a highly unique live experience where the vitality of the performance merged with the improvisational nature of the visuals.
+                </span>
+                <span class="lang-jp">
+                    Metamor チームワーク/2024<br><br><br>
+                  本作品は、ライブ演奏される楽器の音響データをリアルタイムで視覚化するA/Vパフォーマンスです。Max/MSPを介して楽器から受信したオーディオレベル、周波数スペクトラム、アタック・ディケイなどの音響特性を解析し、OSCプロトコルを用いてTouchDesignerと双方向通信を確立。演奏の微細なダイナミクスが即座にビジュアルパラメータへとマッピングされ、音楽の表情と同期した視覚表現が生成されます。
+Max/MSPとTouchDesigner間の双方向通信により、視覚的な変化を音響処理にフィードバックすることも可能にし、演奏者と視覚システムが相互に影響し合う有機的なパフォーマンス空間を構築しました。イベント会場において、演奏の生命力と視覚の即興性が融合した、一回性の高いライブ体験を創出しました。
+                </span>
+            </p>
+        </div>
+    </a>
+
+    <a href="https://youtu.be/tv9MiO6KB3U?si=QiSWbCGGa4zC90nb" class="work-item" target="_blank" rel="noopener noreferrer">
+        <img src="images/resonance.jpg" alt="The End of Genesys Project Thumbnail">
+        <div class="work-overlay">
+            <h4 class="work-title">Resonance</h4>
+            <p class="work-description">
+                <span class="lang-en">
+                    AudioVisual Performance/2024<br><br><br>
+              An A/V performance work presented at Senzoku Digital Art Project 2024.
+This work is an audiovisual piece linking Ableton Live and TouchDesigner via OSC protocol. Information such as audio levels and effect parameters is extracted in real-time from Ableton Live, a music production software, and transmitted to TouchDesigner. By directly mapping the received data to the generation and transformation of visual elements, an experience where sound and image are organically interconnected is created.
+Through bidirectional communication via OSC protocol, musical changes are instantly converted into visual expressions, visualizing even the subtle nuances of sound. This technical approach constructs an immersive audiovisual space where auditory and visual elements mutually influence each other.<br><br><br>
+                    Software ：Max\msp, AbletonLive11、Touchdesigner
+                </span>
+                <span class="lang-jp">
+                    オーディオビジュアル・パフォーマンス/2024<br><br><br>
+                    Senzoku Digital Art Project 2024におけるA/Vパフォーマンス作品。
+                    本作品は、Ableton LiveとTouchDesignerをOSCプロトコルで連携させた視聴覚作品です。音楽制作ソフトウェアであるAbleton Liveから、オーディオレベルやエフェクトパラメータなどの情報をリアルタイムで抽出し、TouchDesignerへ送信。受け取ったデータを視覚要素の生成・変化に直接マッピングすることで、音と映像が有機的に結びついた体験を創出しています。
+OSCプロトコルの双方向通信により、音楽的な変化が即座に視覚表現へと変換され、サウンドの微細なニュアンスまでもが視覚化されます。この技術的アプローチにより、聴覚と視覚が相互に影響し合う、没入感のあるオーディオビジュアル空間が構築されています。
+                    <br><br><br>
+                    作品制作、パフォーマンス<br>
+                    Software ：Max\msp, AbletonLive11、Touchdesigner
+                </span>
+            </p>
+        </div>
+    </a>
+
+    <a href="http://47trees.com" class="work-item" target="_blank" rel="noopener noreferrer">
+        <img src="images/47tree.jpg" alt="47trees">
+        <div class="work-overlay">
+            <h4 class="work-title">47trees</h4>
+            <p class="work-description">
+                <span class="lang-en">
+                    Media theater project/2025<br><br>
+                    Concept, Directing, Music and Sound: Jarosław Kapuściński, Associate Professor of Music, Stanford University.<br><br>
+                    A media theater project born from collecting stories about trees from around the globe. Over the past year, I’ve spoken with friends and acquaintances about trees that marked their lives. The conversations deepened my connection to these gentle giants.<br><br>
+                    I participated in visual programming and video production for this project.
+                </span>
+                <span class="lang-jp">
+                    メディアシアター・プロジェクト/2025<br><br>
+                    コンセプト・監督・音楽：ヤロスワフ・カプシンスキ（スタンフォード大学准教授）。<br><br>
+                    地球の各地で、木にまつわる物語を聴いていく中で生まれたメディアシアター、４７の木の物語。この１年間、友人や縁ある人たちと、人生に痕跡を残した木について、話し合ってきました。会話を通じて、木というやさしい巨人たちとの繋がりは私の中で深まっていきました。木は私たちとは異なる時間の流れを生きていますが、時間が交差する中で、拠り所となり、美しさや潤いや実りを分け与えてくれることが見えてきます。木々は、私たちを迎え入れ、大切な人たちの記憶を守ります。瑞々しく芽吹き、花を咲かせ、葉は色を変え、落ち、土に還る。その巡りの中で、私たちの心と生に寄り添います。
+<br><br>
+                    私は本プロジェクトのビジュアル・プログラミングおよび映像制作に参加しました。
+                </span>
+            </p>
+        </div>
+    </a>
+
+    <a href="https://youtu.be/MbK_ZFsJfH4" class="work-item" target="_blank" rel="noopener noreferrer">
+        <img src="images/DSC09192.jpg" alt="New Project 5 Thumbnail">
+        <div class="work-overlay">
+            <h4 class="work-title">"Humming" for Piano, Video and Electronics</h4>
+            <p class="work-description">
+                <span class="lang-en">
+                    A/V Performance / Live Electronics/2025<br><br><br>
+                    Performed as the opening act for Jon Balke.<br>
+                    
+This work is an audiovisual performance in which piano and live electronics engage in dialogue. A timeline system built in Max/MSP using event numbers establishes the foundational structure of the piece, while bidirectional communication via OSC protocol with TouchDesigner enables real-time visual responses to the performance.
+On the sonic level, the acoustic piano sound is processed within Max/MSP through FFT analysis, delay, reverb (freeze), and sound granulation, creating a multi-layered texture where acoustic resonance merges with electronic sound. The piano's timbre is expanded temporally and spatially, generating an immersive sonic environment.
+On the visual level, organic tree structures are generated using L-system algorithms, with instancing techniques in TouchDesigner creating complex and dynamic visuals. Visual imagery that grows and transforms in response to sonic data resonates with the improvisational nature of the piano performance, offering an experience where auditory and visual elements unite as one.
+                </span>
+                <span class="lang-jp">
+                    A/V パフォーマンス / ライブ・エレクトロニクス/2025<br><br><br>
+                    本作品は、ピアノ演奏とライブ・エレクトロニクスが対話する視聴覚パフォーマンスです。Max/MSPで事前に構築したイベントナンバーシステムにより作品の基本的なタイムラインを設定し、OSCプロトコルを介したTouchDesignerとの双方向通信によって、演奏に呼応するリアルタイムな視覚表現を実現しました。
+音響面では、ピアノの生音をMax/MSP内でFFT解析、ディレイ、リバーブ(フリーズ)、サウンド・グラニュレーションなどの処理を施し、アコースティックな響きと電子音響が融合する多層的なテクスチャーを構築。ピアノの音色が時間的・空間的に拡張され、没入感のある音響空間を創出しています。
+視覚面では、L-systemアルゴリズムを用いて有機的な樹木構造を生成し、TouchDesigner上でインスタンシング技法を活用することで、複雑かつ動的なビジュアルを実現。
+                </span>
+            </p>
+        </div>
+    </a>
+
+    <a class="work-item" target="_blank" rel="noopener noreferrer">
+        <img src="images/DSC09187.jpg" alt="New Project 6 Thumbnail">
+        <div class="work-overlay">
+            <h4 class="work-title">”轟”</h4>
+            <p class="work-description">
+                <span class="lang-en">
+                    SENZOKU DIGITAL ART PROJECT/2025<br><br><br>
+                    2-channel A/V Art.<br>
+                    Created using 3D scan data for visuals and sound production with piano.
+                </span>
+                <span class="lang-jp">
+                    洗足デジタルアートプロジェクト/2025<br><br><br>
+                    2ch A/Vアート。<br>
+                    3Dスキャンデータを用いた映像と、ピアノによるサウンドプロダクションで制作された作品です。
+                </span>
+            </p>
+        </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=QMcLY0besU0" class="work-item" target="_blank" rel="noopener noreferrer">
+        <img src="images/IMG_5037.jpg" alt="Gou Project Thumbnail">
+        <div class="work-overlay">
+            <h4 class="work-title">Fragments of memory</h4>
+            <p class="work-description">
+                <span class="lang-en">
+                    6ch. Tape Music/2022<br><br><br>
+                    A 6-channel tape music composition.<br>
+                  This work is a tape music piece created primarily using the Granulator in Ableton Live. Using environmental sounds collected through field recording and various sound samples as source material, the audio is reconstructed at a granular particle level by modulating parameters such as grain size and position.
+Leveraging the characteristics of granular synthesis, the work freely manipulates time stretching and timbral transformation while layering various effect processing, converting the original sound sources into entirely new acoustic spaces while retaining their inherent textures. Through a 6-channel configuration utilizing Max for Live, the sound image moves through space, realizing a three-dimensional soundscape that envelops the listener.
+                </span>
+                <span class="lang-jp">
+                    6ch テープ音楽<br><br><br>
+                    6チャンネルのテープ音楽作品/2022<br>
+                   本作品は、Ableton LiveのGranulatorを中心に制作したテープ音楽作品です。フィールドレコーディングで収集した環境音や様々なサウンドサンプルを素材とし、グレインサイズやポジションなどのパラメータを変化させることで、音響を微細な粒子レベルから再構築しました。
+グラニュラー合成の特性を活かし、時間軸の伸縮や音色の変容を自在に操作しながら、各種エフェクト処理を重ねることで、元の音源が持つ質感を保ちつつも、全く新しい音響空間へと変換しました。Max for Liveを活用した6チャンネル構成により、音像が空間内を移動し、聴取者を包み込む立体的なサウンドスケープを実現しました。
+                </span>
+            </p>
+        </div>
+    </a>
+    
+</div>
+            
+            <footer class="footer"> 
+                <h3 class="contact">CONTACT ME</h3>
+                <div class="links">
+                    <a class="instagram" href="https://www.instagram.com/chabmsk/" target="_blank" rel="noopener noreferrer">
+                    instagram
+                    </a>
+            
+                </div>
+                <p>feel free to contact me.</p>
+            </footer>
+        </div>
+    </div>
+
+   <script>
+        // [수정됨] 인트로 화면에서 언어 선택 시 호출되는 함수
+        function enterSite(selectedLang) {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // 1. 선택된 언어로 사이트 내용 설정
+            setLanguage(selectedLang);
+            
+            // 2. 스플래시 화면 서서히 사라짐
+            splashScreen.style.opacity = '0';
+            splashScreen.style.visibility = 'hidden';
+
+            // 3. 전환 효과 완료 후 메인 화면 표시
+            splashScreen.addEventListener('transitionend', () => {
+                splashScreen.style.display = 'none'; // DOM에서 제거
+                mainContent.style.visibility = 'visible'; // 보이기
+                mainContent.style.opacity = '1'; // 불투명하게
+            }, { once: true });
+        }
+
+        // 언어 설정 함수 (메인 로직)
+        function setLanguage(lang) {
+            const enElements = document.querySelectorAll('.lang-en');
+            const jpElements = document.querySelectorAll('.lang-jp');
+            const btnEn = document.getElementById('btn-en');
+            const btnJP = document.getElementById('btn-jp');
+
+            if (lang === 'en') {
+                // 영어 표시, 일본어 숨김
+                enElements.forEach(el => el.style.display = 'block');
+                jpElements.forEach(el => el.style.display = 'none');
+                
+                // 네비게이션 버튼 상태 변경
+                if(btnEn) btnEn.classList.add('active');
+                if(btnJP) btnJP.classList.remove('active');
+            } else {
+                // 일본어 표시, 영어 숨김
+                enElements.forEach(el => el.style.display = 'none');
+                jpElements.forEach(el => el.style.display = 'block');
+                
+                // 네비게이션 버튼 상태 변경
+                if(btnJP) btnJP.classList.add('active');
+                if(btnEn) btnEn.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
