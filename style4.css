@@ -568,14 +568,13 @@ a:hover {
     }
 }
 
-@media (max-width: 480px) {
-    .frame {
-        padding: 30px 20px;
-    }
-    .comment {
-        font-size: 48px;
-    }
-    .contact {
-        font-size: 30px;
-    }
-}
+@media (max-width: 768px) {
+    body {
+        /* 1. 모바일에서는 배경 고정을 풉니다 (아이폰 확대 버그 해결) */
+        background-attachment: scroll !important;
+        
+        /* 2. 배경 위치를 중앙으로 설정 */
+        background-position: center center !important;
+        
+        /* 3. 화면을 꽉 채우되 비율 유지 (여전히 잘리는 부분은 생깁니다) */
+        background-size: cover !important;
